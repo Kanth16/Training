@@ -1,0 +1,221 @@
+1.
+mysql> SELECT e_id,name,dep_id,salary,manager_id,rank() over(order by salary desc) as 'Rank' FROM EMPLOYEE limit 3;
++------+---------------+--------+--------+------------+------+
+| e_id | name          | dep_id | salary | manager_id | Rank |
++------+---------------+--------+--------+------------+------+
+| A142 | TARA CUMMINGS | D04    |  99475 | A187       |    1 |
+| A132 | PAUL VINCENT  | D01    |  94791 | A120       |    2 |
+| A128 | ADAM WAYNE    | D05    |  94324 | A165       |    3 |
++------+---------------+--------+--------+------------+------+
+3 rows in set (0.00 sec)
+
+2.
+mysql> SELECT e_id,name,dep_id,salary,manager_id,rank() over(order by salary) as 'Rank' FROM EMPLOYEE limit 1;
++------+-------------+--------+--------+------------+------+
+| e_id | name        | dep_id | salary | manager_id | Rank |
++------+-------------+--------+--------+------------+------+
+| A111 | JOHN HELLEN | D01    |  15380 | A120       |    1 |
++------+-------------+--------+--------+------------+------+
+1 row in set (0.00 sec)
+
+3.
+mysql> select name,manager_id from employee where name in (select dep_manager from dept);
++-----------------+------------+
+| name            | manager_id |
++-----------------+------------+
+| BRUCE WILLS     | A298       |
+| TIM ARCHER      | A298       |
+| ADAM JUSTIN     | A298       |
+| ROBERT SWIFT    | A298       |
+| NATASHA STEVENS | A298       |
++-----------------+------------+
+5 rows in set (0.00 sec)
+
+4.
+mysql> SELECT * FROM EMPLOYEE where e_id in (select manager_id from employee);
++------+-----------------+--------+--------+------------+
+| e_id | name            | dep_id | salary | manager_id |
++------+-----------------+--------+--------+------------+
+| A178 | BRUCE WILLS     | D03    |  66861 | A298       |
+| A120 | TIM ARCHER      | D01    |  44834 | A298       |
+| A187 | ADAM JUSTIN     | D02    |  80543 | A298       |
+| A187 | ROBERT SWIFT    | D04    |  27700 | A298       |
+| A165 | NATASHA STEVENS | D05    |  31377 | A298       |
++------+-----------------+--------+--------+------------+
+5 rows in set (0.00 sec)
+
+5.
+mysql> SELECT e_id,name,dep_id,salary,manager_id,rank() over(order by salary) as 'Rank' FROM EMPLOYEE 
+where e_id in (select manager_id from Employee) limit 1;
++------+--------------+--------+--------+------------+------+
+| e_id | name         | dep_id | salary | manager_id | Rank |
++------+--------------+--------+--------+------------+------+
+| A187 | ROBERT SWIFT | D04    |  27700 | A298       |    1 |
++------+--------------+--------+--------+------------+------+
+1 row in set (0.00 sec)
+
+6.
+mysql> select count(*) from employee where dep_id='D02';
++----------+
+| count(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.00 sec)
+
+7.
+mysql> SELECT e_id,name,dep_id,salary,manager_id,rank() over(partition by dep_id order by salary desc) as 'Rank' FROM EMPLOYEE 
+where dep_id='D05' limit 1;
++------+------------+--------+--------+------------+------+
+| e_id | name       | dep_id | salary | manager_id | Rank |
++------+------------+--------+--------+------------+------+
+| A128 | ADAM WAYNE | D05    |  94324 | A165       |    1 |
++------+------------+--------+--------+------------+------+
+1 row in set (0.00 sec)
+
+8.
+mysql> SELECT e_id,name,dep_id,salary,manager_id,rank() over(partition by dep_id order by salary) as 'Rank' FROM EMPLOYEE 
+where dep_id='D03' limit 1;
++------+-------------+--------+--------+------------+------+
+| e_id | name        | dep_id | salary | manager_id | Rank |
++------+-------------+--------+--------+------------+------+
+| A156 | NICK MARTIN | D03    |  50174 | A178       |    1 |
++------+-------------+--------+--------+------------+------+
+1 row in set (0.00 sec)
+
+9.
+mysql> SELECT count(salary) over(partition by dep_id order by salary desc) FROM EMPLOYEE where dep_id='D01' limit 1;
++--------------------------------------------------------------+
+| count(salary) over(partition by dep_id order by salary desc) |
++--------------------------------------------------------------+
+|                                                            1 |
++--------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+10.
+mysql> select count(*) from employee e,dept d where e.dep_id=d.dep_id and dep_manager='NATASHA STEVENS';
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+11.
+mysql> select name,count(*),dep_name,dep_manager from employee e,dept d where e.dep_id=d.dep_id and dep_name='HEALTH';
++----------------+----------+----------+-------------+
+| name           | count(*) | dep_name | dep_manager |
++----------------+----------+----------+-------------+
+| MARTIN TREDEAU |        6 | HEALTH   | TIM ARCHER  |
++----------------+----------+----------+-------------+
+1 row in set (0.00 sec)
+
+12.
+mysql> select e.dep_id,e_id,manager_id from employee e,dept d where e.dep_id=d.dep_id and dep_name='COMMUNICATIONS';
++--------+------+------------+
+| dep_id | e_id | manager_id |
++--------+------+------------+
+| D02    | A116 | A187       |
+| D02    | A198 | A187       |
+| D02    | A187 | A298       |
+| D02    | A121 | A187       |
+| D02    | A194 | A187       |
+| D02    | A133 | A187       |
++--------+------+------------+
+6 rows in set (0.07 sec)
+
+13.
+mysql> select d.dep_id,d.dep_name,avg(e.salary) as 'expense' from employee e,dept d where e.dep_id=d.dep_id group by dep_id;
++--------+----------------+------------+
+| dep_id | dep_name       | expense    |
++--------+----------------+------------+
+| D01    | HEALTH         | 53927.6667 |
+| D02    | COMMUNICATIONS | 48271.3333 |
+| D03    | PRODUCT        | 58517.5000 |
+| D04    | INSURANCE      | 51913.3333 |
+| D05    | FINANCE        | 56660.3333 |
++--------+----------------+------------+
+5 rows in set (0.04 sec)
+
+14.
+mysql> select d.dep_id,d.dep_name,SUM(e.salary) AS total_salary,COUNT(*) as employees from employee e,dept d 
+where e.dep_id=d.dep_id and dep_name='FINANCE';
++--------+----------+--------------+-----------+
+| dep_id | dep_name | total_salary | employees |
++--------+----------+--------------+-----------+
+| D05    | FINANCE  |       169981 |         3 |
++--------+----------+--------------+-----------+
+1 row in set (0.00 sec)
+
+15.
+mysql> select d.dep_id,d.dep_name,sum(e.salary) as 'expense',count(*) as employees from employee e,dept d 
+where e.dep_id=d.dep_id group by dep_id order by expense limit 1;
++--------+----------+---------+-----------+
+| dep_id | dep_name | expense | employees |
++--------+----------+---------+-----------+
+| D03    | PRODUCT  |  117035 |         2 |
++--------+----------+---------+-----------+
+1 row in set (0.00 sec)
+
+16.
+mysql> select d.dep_name,count(*) as employees from employee e,dept d where e.dep_id=d.dep_id group by e.dep_id;
++----------------+-----------+
+| dep_name       | employees |
++----------------+-----------+
+| HEALTH         |         6 |
+| COMMUNICATIONS |         6 |
+| PRODUCT        |         2 |
+| INSURANCE      |         3 |
+| FINANCE        |         3 |
++----------------+-----------+
+5 rows in set (0.00 sec)
+
+17.
+mysql> select DEP_ID,count(*) as employees from employee where salary<10000 group by dep_id;
+Empty set (0.00 sec)
+
+mysql> select DEP_ID,count(*) as employees from employee where salary<50000 group by dep_id;
++--------+-----------+
+| DEP_ID | employees |
++--------+-----------+
+| D02    |         3 |
+| D01    |         3 |
+| D04    |         2 |
+| D05    |         2 |
++--------+-----------+
+4 rows in set (0.00 sec)
+
+18.
+mysql> select count(*) as employees from employee where dep_id='D04';
++-----------+
+| employees |
++-----------+
+|         3 |
++-----------+
+1 row in set (0.00 sec)
+
+19.
+mysql> select d.dep_id,d.dep_name,sum(e.salary) as 'expense',avg(e.salary) as average,count(*) as employees from employee e,dept d where e.dep_id=d.dep_id group by dep_id order by employees desc limit 2;
++--------+----------------+---------+------------+-----------+
+| dep_id | dep_name       | expense | average    | employees |
++--------+----------------+---------+------------+-----------+
+| D01    | HEALTH         |  323566 | 53927.6667 |         6 |
+| D02    | COMMUNICATIONS |  289628 | 48271.3333 |         6 |
++--------+----------------+---------+------------+-----------+
+2 rows in set (0.00 sec)
+
+20.
+mysql> select name,manager_id from employee where manager_id=(select e_id from employee where name='TIM COOK');
+Empty set (0.00 sec)
+
+mysql> select name,manager_id from employee where manager_id=(select e_id from employee where name='TIM ARCHER');
++----------------+------------+
+| name           | manager_id |
++----------------+------------+
+| MARTIN TREDEAU | A120       |
+| PAUL VINCENT   | A120       |
+| BRAD MICHAEL   | A120       |
+| EDWARD CANE    | A120       |
+| JOHN HELLEN    | A120       |
++----------------+------------+
+5 rows in set (0.00 sec)

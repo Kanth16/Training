@@ -1,0 +1,11 @@
+mysql> create database problemset00;
+Query OK, 1 row affected (0.11 sec)
+
+mysql> use problemset00
+Database changed
+
+mysql> create table employee(e_id varchar(5),name char(20),dep_id varchar(5),salary int,manager_id varchar(5));
+Query OK, 0 rows affected (1.51 sec)
+
+mysql> create table dept(dep_id varchar(5),dep_name char(15),dep_manager char(20));
+Query OK, 0 rows affected (0.53 sec)
