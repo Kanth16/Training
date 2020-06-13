@@ -1,0 +1,104 @@
+mysql> insert into hotel values('H111','Empire Hotel','New York');
+Query OK, 1 row affected (0.20 sec)
+
+mysql> insert into hotel values('H235','Park Place','New York');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into hotel values('H432','Brownstone Hotel','Toronto');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into hotel values('H498','james Plaza','Toronto');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into hotel values('H193','Devon Hotel','Boston');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into hotel values('H437','Clairmount Hotel','Boston');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into room values(313,'H111','S',145.00);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into room values(412,'H111','N',145.00);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into room values(1267,'H235','N',175.00);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into room values(1289,'H235','N',195.00);
+Query OK, 1 row affected (0.17 sec)
+
+mysql> insert into room values(876,'H432','S',124.00);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into room values(898,'H432','S',124.00);
+Query OK, 1 row affected (0.17 sec)
+
+mysql> insert into room values(345,'H498','N',160.00);
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into room values(467,'H498','N',180.00);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into room values(1001,'H193','S',150.00);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into room values(1201,'H193','N',175.00);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into room values(257,'H437','N',140.00);
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into room values(223,'H437','N',155.00);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into booking values('H111','G256','10-AUG-99','15-AUG-99',412);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into booking values('H111','G367','18-AUG-99','21-AUG-99',412);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into booking values('H235','G879','05-SEP-99','12-SEP-99',1267);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into booking values('H498','G230','15-SEP-99','18-SEP-99',467);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into booking values('H498','G256','30-NOV-99','02-DEC-99',345);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into booking values('H498','G467','03-NOV-99','05-NOV-99',345);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into booking values('H193','G190','15-NOV-99','19-NOV-99',1001);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into booking values('H193','G367','12-SEP-99','14-SEP-99',1001);
+Query OK, 1 row affected (0.16 sec)
+
+mysql> insert into booking values('H193','G367','01-OCT-99','06-OCT-99',1201);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into booking values('H437','G190','04-OCT-99','06-OCT-99',223);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into booking values('H437','G879','14-SEP-99','17-SEP-99',223);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO GUEST VALUES('G256','Adam Wayne','Pittsburgh');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO GUEST VALUES('G367','Tara Cummings','Baltimore');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> INSERT INTO GUEST VALUES('G879','Vanessa Parry','Pittsburgh');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO GUEST VALUES('G230','Tom Hancock','Philadelphia');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> INSERT INTO GUEST VALUES('G467','Robert Swift','Atlanta');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO GUEST VALUES('G190','Edward Cane','Baltimore');
+Query OK, 1 row affected (0.18 sec)

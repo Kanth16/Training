@@ -1,0 +1,17 @@
+mysql> create database problemset01;
+Query OK, 1 row affected (0.26 sec)
+
+mysql> use problemset01;
+Database changed
+
+mysql> create table hotel(hotel_no varchar(5),name char(20),city char(15));
+Query OK, 0 rows affected (2.19 sec)
+
+mysql> create table room(room_no int,hotel_no varchar(5),type char(2),price float);
+Query OK, 0 rows affected (0.46 sec)
+
+mysql> create table booking(hotel_no varchar(5),guest_no varchar(4),date_from date,date_to date,room_no int);
+Query OK, 0 rows affected (0.43 sec)
+
+mysql> create table guest(guest_no varchar(4),name char(20),city char(15));
+Query OK, 0 rows affected (0.86 sec)
