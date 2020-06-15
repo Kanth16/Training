@@ -1,0 +1,179 @@
+1.
+mysql> select * from hotel;
++----------+------------------+----------+
+| hotel_no | name             | city     |
++----------+------------------+----------+
+| H111     | Empire Hotel     | New York |
+| H235     | Park Place       | New York |
+| H432     | Brownstone Hotel | Toronto  |
+| H498     | james Plaza      | Toronto  |
+| H193     | Devon Hotel      | Boston   |
+| H437     | Clairmount Hotel | Boston   |
++----------+------------------+----------+
+6 rows in set (0.03 sec)
+
+2.
+mysql> select * from hotel where city='New York';
++----------+--------------+----------+
+| hotel_no | name         | city     |
++----------+--------------+----------+
+| H111     | Empire Hotel | New York |
+| H235     | Park Place   | New York |
++----------+--------------+----------+
+2 rows in set (0.01 sec)
+
+3.
+mysql> select name,city from guest order by city;
++---------------+--------------+
+| name          | city         |
++---------------+--------------+
+| Robert Swift  | Atlanta      |
+| Tara Cummings | Baltimore    |
+| Edward Cane   | Baltimore    |
+| Tom Hancock   | Philadelphia |
+| Adam Wayne    | Pittsburgh   |
+| Vanessa Parry | Pittsburgh   |
++---------------+--------------+
+6 rows in set (0.00 sec)
+
+4.
+mysql> select * from room where type='N' order by price;
++---------+----------+------+-------+
+| room_no | hotel_no | type | price |
++---------+----------+------+-------+
+|     257 | H437     | N    |   140 |
+|     412 | H111     | N    |   145 |
+|     223 | H437     | N    |   155 |
+|     345 | H498     | N    |   160 |
+|    1267 | H235     | N    |   175 |
+|    1201 | H193     | N    |   175 |
+|     467 | H498     | N    |   180 |
+|    1289 | H235     | N    |   195 |
++---------+----------+------+-------+
+8 rows in set (0.00 sec)
+
+5.
+mysql> select count(*) from hotel;
++----------+
+| count(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.01 sec)
+
+6.
+mysql> select city from guest group by city;
++--------------+
+| city         |
++--------------+
+| Pittsburgh   |
+| Baltimore    |
+| Philadelphia |
+| Atlanta      |
++--------------+
+4 rows in set (0.00 sec)
+
+7.
+mysql> select avg(price) from room;
++--------------------+
+| avg(price)         |
++--------------------+
+| 155.66666666666666 |
++--------------------+
+1 row in set (0.00 sec)
+
+8.
+mysql> select h.name,r.room_no,r.type from hotel h,room r where h.hotel_no=r.hotel_no;
++------------------+---------+------+
+| name             | room_no | type |
++------------------+---------+------+
+| Empire Hotel     |     313 | S    |
+| Empire Hotel     |     412 | N    |
+| Park Place       |    1267 | N    |
+| Park Place       |    1289 | N    |
+| Brownstone Hotel |     876 | S    |
+| Brownstone Hotel |     898 | S    |
+| james Plaza      |     345 | N    |
+| james Plaza      |     467 | N    |
+| Devon Hotel      |    1001 | S    |
+| Devon Hotel      |    1201 | N    |
+| Clairmount Hotel |     257 | N    |
+| Clairmount Hotel |     223 | N    |
++------------------+---------+------+
+12 rows in set (0.00 sec)
+
+9.
+mysql> select h.name,b.room_no,b.date_from,b.date_to from hotel h,booking b 
+where h.hotel_no=b.hotel_no and h.city='new york';
++--------------+---------+-----------+-----------+
+| name         | room_no | date_from | date_to   |
++--------------+---------+-----------+-----------+
+| Empire Hotel |     412 | 10-AUG-99 | 15-AUG-99 |
+| Empire Hotel |     412 | 18-AUG-99 | 21-AUG-99 |
+| Park Place   |    1267 | 05-SEP-99 | 12-SEP-99 |
++--------------+---------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+10.
+mysql> select count(*) from booking where date_from LIKE "%SEP%";
++----------+
+| count(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.00 sec)
+
+11.
+mysql> select g.name,g.city from guest g,booking b where g.guest_no=b.guest_no and b.date_from LIKE '%AUG%';
++---------------+------------+
+| name          | city       |
++---------------+------------+
+| Adam Wayne    | Pittsburgh |
+| Tara Cummings | Baltimore  |
++---------------+------------+
+2 rows in set (0.00 sec)
+
+12.
+mysql> select h.name,r.room_no from hotel h,room r where h.hotel_no=r.hotel_no and room_no not in (select room_no from booking);
++------------------+---------+
+| name             | room_no |
++------------------+---------+
+| Empire Hotel     |     313 |
+| Park Place       |    1289 |
+| Brownstone Hotel |     876 |
+| Brownstone Hotel |     898 |
+| Clairmount Hotel |     257 |
++------------------+---------+
+5 rows in set (0.01 sec)
+
+13.
+mysql> select h.name,h.city,rank() over(order by price desc) from hotel h,room r 
+where h.hotel_no=r.hotel_no limit 1;
++------------+----------+----------------------------------+
+| name       | city     | rank() over(order by price desc) |
++------------+----------+----------------------------------+
+| Park Place | New York |                                1 |
++------------+----------+----------------------------------+
+1 row in set (0.00 sec)
+
+14.
+mysql> select h.name,r.room_no,h.city,r.price from hotel h,room r where r.hotel_no=h.hotel_no
+    -> and r.price < (select min(r.price) from room r,hotel h where r.hotel_no=h.hotel_no and h.city='boston');
++------------------+---------+---------+-------+
+| name             | room_no | city    | price |
++------------------+---------+---------+-------+
+| Brownstone Hotel |     876 | Toronto |   124 |
+| Brownstone Hotel |     898 | Toronto |   124 |
++------------------+---------+---------+-------+
+2 rows in set (0.00 sec)
+
+15.
+mysql> select city,avg(price) from room r,hotel h where h.hotel_no=r.hotel_no group by city;
++----------+------------+
+| city     | avg(price) |
++----------+------------+
+| New York |        165 |
+| Toronto  |        147 |
+| Boston   |        155 |
++----------+------------+
+3 rows in set (0.00 sec)
