@@ -1,0 +1,9 @@
+Create table Location (locationid int primary key, name varchar(30), sunlight float, water float); 
+Create table Gardener (gardenerid int primary key, name varchar(30), age int); 
+Create table Plant (plantid int primary key, name varchar(30), sunlight float, water float, weight float); 
+Create table planted (plantFK int, gardenerFK int, locationFK int, date1 varchar(20), seeds int, 
+foreign key(plantFK) references plant(plantid), foreign key(gardenerFK) references gardener(gardenerid), 
+foreign key(locationFK) references location(locationid)); 
+Create table picked (plantFK int, gardenerFK int, locationFK int, date1 varchar(20), amount int, weight float, 
+foreign key(plantFK) references plant(plantid), 
+foreign key(gardenerFK) references gardener(gardenerid), foreign key(locationFK) references location(locationid)); 
