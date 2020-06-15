@@ -1,3 +1,5 @@
+create database problemset02;
+use problemset02;
 Create table Location (locationid int primary key, name varchar(30), sunlight float, water float); 
 Create table Gardener (gardenerid int primary key, name varchar(30), age int); 
 Create table Plant (plantid int primary key, name varchar(30), sunlight float, water float, weight float); 
