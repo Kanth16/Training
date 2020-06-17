@@ -1,0 +1,111 @@
+1.
+mysql> select sum(weight) from picked where plantFK=(select plantid from plant where name='corn');
++--------------------+
+| sum(weight)        |
++--------------------+
+| 17.539999961853027 |
++--------------------+
+1 row in set (0.01 sec)
+
+2.
+mysql> update planted set locationfk=1 where gardenerfk=(select gardenerid from gardener where name='Erin');
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+3.
+mysql> alter table gardener add exper int(30);
+Query OK, 0 rows affected, 1 warning (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> select * from gardener;
++------------+--------+------+-------+
+| gardenerid | name   | age  | exper |
++------------+--------+------+-------+
+|          0 | Mother |   36 |  NULL |
+|          1 | Father |   38 |  NULL |
+|          2 | Tim    |   15 |  NULL |
+|          3 | Erin   |   12 |  NULL |
++------------+--------+------+-------+
+4 rows in set (0.00 sec)
+
+4.
+mysql> select p.name from plant p,planted p1 where p.plantid=p1.plantfk and p1.seeds<20 and p1.date1 LIKE '14-APR%';
++--------+
+| name   |
++--------+
+| Carrot |
++--------+
+1 row in set (0.00 sec)
+
+5.
+mysql> select sunlight,water from plant where lower(name) like 'c%' or lower(name) like 'r%';
++----------+-------+
+| sunlight | water |
++----------+-------+
+|     0.26 |  0.82 |
+|     0.44 |  0.76 |
+|     0.28 |  0.84 |
++----------+-------+
+3 rows in set (0.00 sec)
+
+6.
+mysql> select p.name,sum(p1.seeds) as 'Total Seeds' from plant p,planted p1 where p1.plantfk=p.plantid group by(p.name) order by p.name desc;
++---------+-------------+
+| name    | Total Seeds |
++---------+-------------+
+| Tomato  |          38 |
+| Radish  |          30 |
+| Lettuce |          30 |
+| Corn    |          32 |
+| Carrot  |          42 |
+| Beet    |          36 |
++---------+-------------+
+6 rows in set (0.00 sec)
+
+7.
+mysql> select p.name,avg(p1.amount/p2.seeds) as 'Number Of Items' from planted p2 join picked  p1 on p1.plantfk=p2.plantfk left join plant p on p2.plantfk=p.plantid group by p.name;
++--------+-----------------+
+| name   | Number Of Items |
++--------+-----------------+
+| Carrot |      1.07142500 |
+| Corn   |      2.33332500 |
+| Tomato |      0.39470000 |
+| Radish |      0.76670000 |
++--------+-----------------+
+4 rows in set (0.00 sec)
+
+8.
+mysql> select g.name,p.name,p1.date1,p1.amount from gardener g join picked p1 join plant p on p1.gardenerfk=g.gardenerid and g.name='Tim' and p1.plantfk=p.plantid and p1.amount > 20 order by p1.amount;
++------+--------+-------------+--------+
+| name | name   | date1       | amount |
++------+--------+-------------+--------+
+| Tim  | Radish | 16-JUL-2012 |     23 |
+| Tim  | Carrot | 18-AUG-2012 |     28 |
++------+--------+-------------+--------+
+2 rows in set (0.00 sec)
+
+9.
+mysql> select distinct(g.name) from gardener g join picked p join planted p1 on p.locationfk=p1.locationfk and p.gardenerfk=p1.gardenerfk and p1.gardenerfk=g.gardenerid;
++--------+
+| name   |
++--------+
+| Tim    |
+| Erin   |
+| Father |
++--------+
+3 rows in set (0.00 sec)
+
+10.
+mysql> create view plantname as select p.name from plant p join picked p1 on p.plantid=p1.plantfk and p1.locationfk not in(select locationid from location where name='West') and p1.date1 like '%AUG%';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from plantname;
++--------+
+| name   |
++--------+
+| Carrot |
+| Carrot |
+| Corn   |
+| Tomato |
++--------+
+4 rows in set (0.00 sec)
