@@ -1,0 +1,89 @@
+mysql> insert into movie values(101,'Gone with the Wind',1939,'Victor Fleming');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into movie values(102,'Star Wars',1977,'George Lucas');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into movie values(103,'The Sound of Music',1965,'Robert Wise');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into movie values(104,'E.T.',1982,'Steven Spielberg');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into movie values(105,'Titanic',1997,'James Cameron');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into movie values(106,'Snow White',1937,NULL);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into movie values(107,'Avatar',2009,'James Cameron');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into movie values(108,'Raiders of the lost',1981,'Steven Spielberg');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into reviewer values(201,'Sarah Marinez');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into reviewer values(202,'Daniel Lewis');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into reviewer values(203,'Brittany Harris');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into reviewer values(204,'Mike Anderson');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into reviewer values(205,'Chris Jackson');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into reviewer values(206,'Elizabeth Thomas');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into reviewer values(207,'James Cameron');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into reviewer values(208,'Ashley White');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into rating values(201,101,2,'2011-01-22');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into rating values(201,101,4,'2011-01-27');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into rating values(202,106,4,NULL);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into rating values(203,103,2,'2011-01-20');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into rating values(203,108,4,'2011-01-12');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into rating values(203,108,2,'2011-01-30');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into rating values(204,101,3,'2011-01-09');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into rating values(205,103,3,'2011-01-27');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into rating values(205,104,2,'2011-01-22');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into rating values(205,108,4,NULL);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into rating values(206,107,3,'2011-01-15');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into rating values(206,106,5,'2011-01-19');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into rating values(207,107,5,'2011-01-20');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into rating values(208,104,3,'2011-01-02');
+Query OK, 1 row affected (0.01 sec)
