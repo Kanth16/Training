@@ -1,0 +1,11 @@
+with open("day9.py","r") as d9:
+  s=d9.readlines()
+  print(dir(d9))
+  print("Readable():",d9.readable())
+  print("Tell()    :",d9.tell())
+  d9.seek(4)
+  print("Seek()    :",d9.readline())
+  print("Seekable():",d9.seekable())
+  print("Writable():",d9.writable())
+  print("isatty()  :",d9.isatty())
+  print("fileno()  :",d9.fileno())
