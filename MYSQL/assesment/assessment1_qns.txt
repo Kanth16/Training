@@ -1,0 +1,87 @@
+1.Employee table
+
+ 
+
+emp_id    enmae               date             in_time                              out_time            
+
+101         A             2020-06-01          9:00 AM                               3:00 PM              
+
+101         A             2020-06-01          3:15 PM                               4:25 PM              
+
+102         B             2020-06-01          3:00 PM                               7:00 PM              
+
+102         B             2020-06-01          8:30 PM                               9:15 PM              
+
+103         C             2020-06-02          3:00 PM                               7:00 PM
+
+ 
+
+Questions:
+
+----------
+
+1.Find employee(s) who had most swipes for a given day
+
+2.Find time in office(login time) for each employee at each swipe
+
+3.Get break time each employee hadat each swipe
+
+4.update the recent swipe with first swipe in_time details (if and only if more than one swipe exists per employee
+
+5.Find employee(s) who did not swipe atleast once for on a given day
+
+6.Get the AM/PM on recent swipe made by an employee using INSTR/SUBSTR function
+
+ 
+
+2. str= "'aaa, bb ccc'"
+
+use substr/instr functions to return "b c" as output
+
+ 
+
+3. With below table, convert to expected output shown
+
+ 
+
+eid        name           sal         month
+
+101         A             100         Jan
+
+101         A             200         Feb
+
+102         B             200         Jan
+
+102         B             300         Feb
+
+103         C             200         Jan
+
+103         C             200         Feb
+
+ 
+
+expected output:
+
+ 
+
+eid        name           jan         feb
+
+101         A             100         200
+
+102         B             200         300
+
+103         C             200         200
+
+104         D             100         300
+
+ 
+
+Questions:(based on output above)
+
+--------
+
+1.find employee who did not have salary change
+
+2.Find employee who had maximum salary for a given month or have maximum salary difference amoung other employee.
+
+If there is tie on maximum salary for given month, employee with maximum salary in upcoming month will be winner

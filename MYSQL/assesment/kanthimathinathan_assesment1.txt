@@ -1,0 +1,19 @@
+Kanthimathinathan Ramasubramanian
+11739104
+
+problem_set 01:
+
+1.select ename,count(ename) from employee group by ename having count(ename)>1;
+2.select max(in_time)-max(out_time) from employee group by ename;
+3.select (out_time-in_time) from employee group by ename;
+4.select
+5.select * from employee group by ename having count(in_time)>1;
+6.select 
+
+problem_set 02:
+SELECT substr(INSTR("aaa, bb ccc", "b"),instr("aaa, bb ccc","c")) AS STRING;
+
+problem set 03:
+
+1.select * from employee where jan=feb;
+2.select max(max(jan)-max(feb)) as maxi from employee group by employee order by maxi;
